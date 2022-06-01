@@ -14,7 +14,10 @@
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  example-package = pkgs.callPackage ./pkgs/example-package { };
+  cockpit = pkgs.callPackage ./pkgs/cockpit {};
+  cockpit-machines = pkgs.callPackage ./pkgs/cockpit/machines.nix {};
+  #cockpit-client = cockpit.override { client = true; };
+  libvirt-dbus = pkgs.callPackage ./pkgs/libvirt-dbus {};
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
 }
