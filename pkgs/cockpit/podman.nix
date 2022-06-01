@@ -17,6 +17,7 @@ stdenv.mkDerivation rec {
     substituteInPlace Makefile \
       --replace /usr/share $out/share
     touch dist/manifest.json
+    echo "yo"
   '';
 
   dontBuild = true;
