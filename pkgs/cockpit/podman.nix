@@ -1,8 +1,8 @@
 { lib, stdenv, fetchzip, gettext }:
 
 stdenv.mkDerivation rec {
-  pname = "cockpit-machines";
-  version = "269";
+  pname = "cockpit-podman";
+  version = "48";
 
   src = fetchzip {
     url = "https://github.com/cockpit-project/${pname}/releases/download/${version}/${pname}-${version}.tar.xz";
@@ -16,7 +16,6 @@ stdenv.mkDerivation rec {
   postPatch = ''
     substituteInPlace Makefile \
       --replace /usr/share $out/share
-    touch pkg/lib/cockpit.js
     touch dist/manifest.json
   '';
 

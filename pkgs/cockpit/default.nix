@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchzip, pkgconfig, glib, systemd, json-glib, gnutls, krb5, polkit, libssh, pam, libxslt, xmlto
+{ lib, stdenv, fetchFromGitHub, pkgconfig, glib, systemd, json-glib, gnutls, krb5, polkit, libssh, pam, libxslt, xmlto
 , python3, gnused, coreutils, makeWrapper, openssl
 , packages ? []
 , client ? false, python3Packages, wrapGAppsHook, gtk3, gobject-introspection, webkitgtk, glib-networking, openssh }:
@@ -9,8 +9,10 @@ in stdenv.mkDerivation rec {
   pname = "cockpit";
   version = "270";
 
-  src = fetchzip {
-    url = "https://github.com/cockpit-project/cockpit/releases/download/${version}/cockpit-${version}.tar.xz";
+  src = fetchFromGitHub {
+    owner = "cockpit-project";
+    repo = pname;
+    rev = version;
     sha256 = "sha256-LzPwuYBC2HukgsCtWPyCJkJX8gwe0Fg4ARqSPy2HB7U=";
   };
 

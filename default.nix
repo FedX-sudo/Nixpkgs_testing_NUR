@@ -18,6 +18,6 @@
   cockpit-machines = pkgs.callPackage ./pkgs/cockpit/machines.nix {};
   #cockpit-client = cockpit.override { client = true; };
   libvirt-dbus = pkgs.callPackage ./pkgs/libvirt-dbus {};
-  # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
+  cockpit-podman = pkgs.callPackage ./pkgs/cockpit/podman.nix { };
   # ...
 }
