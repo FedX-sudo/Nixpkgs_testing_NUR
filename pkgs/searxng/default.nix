@@ -14,13 +14,13 @@ toPythonModule (buildPythonApplication rec {
     sha256 = "sha256-sIJ+QXwUdsRIpg6ffUS3ItQvrFy0kmtI8whaiR7qEz4=";
   };
 
-  patches = [
-    # Fix a crash, remove with the next update
-    (fetchpatch {
-      url = "https://github.com/searx/searx/commit/9c10b150963babb7f0b52081693a42b2e61eede9.patch";
-      sha256 = "0svp8799628wja2hq59da6rxqi99am8p6hb8y27ciwzsjz0wwba7";
-    })
-  ];
+#   patches = [
+#     # Fix a crash, remove with the next update
+#     (fetchpatch {
+#       url = "https://github.com/searx/searx/commit/9c10b150963babb7f0b52081693a42b2e61eede9.patch";
+#       sha256 = "0svp8799628wja2hq59da6rxqi99am8p6hb8y27ciwzsjz0wwba7";
+#     })
+#   ];
 
   postPatch = ''
     sed -i 's/==.*$//' requirements.txt
@@ -61,7 +61,7 @@ toPythonModule (buildPythonApplication rec {
   postInstall = ''
     # Create a symlink for easier access to static data
     mkdir -p $out/share
-    ln -s ../${python3.sitePackages}/searx/static $out/share/
+    ln -s ../${python3.sitePackages}/searxng/static $out/share/
   '';
 
   passthru.tests = { inherit (nixosTests) searx; };
