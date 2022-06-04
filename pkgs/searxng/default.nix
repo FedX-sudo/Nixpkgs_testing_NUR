@@ -4,14 +4,14 @@ with python3Packages;
 
 toPythonModule (buildPythonApplication rec {
   pname = "searxng";
-  version = "1.0.0";
+  version = "1.0.0-searxng-alpha-202206022146";
 
   # pypi doesn't receive updates
   src = fetchFromGitHub {
     owner = "searxng";
     repo = "searxng";
-    rev = "v${version}";
-    sha256 = "sha256-sIJ+QXwUdsRIpg6ffUS3ItQvrFy0kmtI8whaiR7qEz4=";
+    rev = "96dc4369d535dc20178a3e7df793c8f2427d2c79";
+    sha256 = "sha256-ITTL0MypbuIIFt2xsB5tkjXu0jsH1l3fMHjbEid+zO0=";
   };
 
 #   patches = [
@@ -30,7 +30,7 @@ toPythonModule (buildPythonApplication rec {
     export SEARX_DEBUG="true";
   '';
 
-  propagatedBuildInputs = [
+/*  propagatedBuildInputs = [
     Babel
     certifi
     python-dateutil
@@ -51,7 +51,28 @@ toPythonModule (buildPythonApplication rec {
     requests
     speaklater
     werkzeug
-  ];
+  ];*/
+   propagatedBuildInputs = [
+     certifi
+     babel
+     flaskbabel
+     flask
+     jinja2
+     lxml
+     pygments
+     python-dateutil
+     pyyaml
+     httpx
+     brotli
+     uvloop
+     httpx-socks
+     langdetect
+     setproctitle
+     redis
+     markdown-it-py
+     pkgs.kodiPackages.typing_extensions
+     h2
+   ];
 
   # tests try to connect to network
   doCheck = false;
@@ -61,7 +82,7 @@ toPythonModule (buildPythonApplication rec {
   postInstall = ''
     # Create a symlink for easier access to static data
     mkdir -p $out/share
-    ln -s ../${python3.sitePackages}/searxng/static $out/share/
+    ln -s ../${python3.sitePackages}/searx/static $out/share/
   '';
 
   passthru.tests = { inherit (nixosTests) searx; };
